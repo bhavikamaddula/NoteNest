@@ -1,39 +1,139 @@
 
 body {
-  font-family: Arial;
-  background: #f2f4f8;
-  text-align: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f7f6f0;
+  color: #26352f;
+  margin: 0;
 }
 
-h1 {
-  color: #333;
-  font-size: 30px;
-  margin: 30px 10px;
-  line-height: 1.4;
-  text-align: center;
+.app-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+}
+
+.header {
+  background: #294b39;
+  color: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  color: white;
+  font-size: 36px;
+  margin: 5px;
+}
+
+.header p {
+  color: #e1eadf;
+}
+
+.section {
+  background: white;
+  padding: 25px;
+  margin: 25px 0;
+  border-radius: 12px;
+  border: 1px solid #e5e8df;
+}
+
+h2 {
+  color: #355e46;
+  margin-bottom: 20px;
 }
 
 input, textarea {
   display: block;
-  width: 300px;
-  padding: 10px;
-  margin: 10px auto;
+  width: 90%;
+  max-width: 450px;
+  padding: 12px;
+  margin: 12px auto;
+  border: 1px solid #d5dfd5;
+  border-radius: 7px;
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 110px;
 }
 
 button {
-  padding: 10px 20px;
-  background: #4b65d1;
+  background: #355e46;
   color: white;
   border: none;
+  padding: 10px 20px;
+  margin: 8px;
+  border-radius: 7px;
   cursor: pointer;
-  margin: 5px;
-  border-radius: 5px;
+  transition: 0.2s;
 }
 
-div div {
-  background: white;
-  margin: 15px auto;
+button:hover {
+  background: #203d2d;
+}
+
+.notes-grid, .pdf-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.note-card, .pdf-card {
+  background: #fbfcf8;
+  border: 1px solid #e1e8dc;
+  border-radius: 10px;
+  padding: 18px;
+  width: 280px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.note-card h3, .pdf-card h3 {
+  color: #294b39;
+}
+
+.subject {
+  background: #e6eee3;
+  color: #355e46;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 13px;
+}
+
+.upload-area {
+  background: #f5f7f0;
   padding: 15px;
-  width: 350px;
-  border-radius: 8px;
+  border-radius: 10px;
+}
+
+.empty {
+  color: #888;
+  padding: 15px;
+}
+
+a {
+  color: #426b55;
+  font-weight: 600;
+}
+
+.footer {
+  padding: 20px;
+  color: #777;
+  font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .app-container {
+    padding: 12px;
+  }
+
+  .header h1 {
+    font-size: 29px;
+  }
+
+  .section {
+    padding: 15px;
+  }
 }

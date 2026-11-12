@@ -18,7 +18,6 @@ function App() {
   const getPDFs = () =>
     axios.get(url + "/pdfs").then(r => setPdfs(r.data));
 
-  // Add Note
   const addNote = () => {
     if (!title || !subject || !content) {
       alert("Fill all fields");
@@ -34,12 +33,10 @@ function App() {
       });
   };
 
-  // Delete Note
   const deleteNote = id => {
     axios.delete(url + "/notes/" + id).then(getNotes);
   };
 
-  // Upload PDF
   const uploadPDF = e => {
     const file = e.target.files[0];
 
@@ -63,7 +60,6 @@ function App() {
       .catch(() => alert("PDF upload failed"));
   };
 
-  // Delete PDF
   const deletePDF = id => {
     if (window.confirm("Delete this PDF?")) {
       axios.delete(url + "/pdfs/" + id).then(() => {
@@ -79,80 +75,109 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h1>NoteNest - Smart Notes Organizer</h1>
+    <main className="app-container">
 
-      <h2>Add Notes</h2>
+      <header className="header">
+        <h1>NEW NOTENEST DESIGN</h1>
+        <p>Your Space. Your Notes. Your Knowledge.</p>
+      </header>
 
-      <input
-        placeholder="Title"
-        value={title}
-        onChange={e => setTitle(e.target.value)}
-      />
+      <section className="section">
+        <h2>Create a Note</h2>
 
-      <input
-        placeholder="Subject"
-        value={subject}
-        onChange={e => setSubject(e.target.value)}
-      />
+        <input
+          placeholder="Enter note title"
+          value={title}
+          onChange={e => setTitle(e.target.value)}
+        />
 
-      <textarea
-        placeholder="Content"
-        value={content}
-        onChange={e => setContent(e.target.value)}
-      />
+        <input
+          placeholder="Enter subject"
+          value={subject}
+          onChange={e => setSubject(e.target.value)}
+        />
 
-      <button onClick={addNote}>Add Note</button>
+        <textarea
+          placeholder="Write your thoughts here..."
+          value={content}
+          onChange={e => setContent(e.target.value)}
+        />
 
-      <h2>My Notes</h2>
+        <button onClick={addNote}>+ Add Note</button>
+      </section>
 
-      {notes.map(n => (
-        <div key={n._id}>
-          <h3>{n.title}</h3>
-          <p>{n.subject}</p>
-          <p>{n.content}</p>
-          <button onClick={() => deleteNote(n._id)}>
-            Delete Note
-          </button>
+      <section className="section">
+        <h2>My Notes</h2>
+
+        <div className="notes-grid">
+          {notes.length === 0 ? (
+            <p className="empty">No notes available. Create your first note!</p>
+          ) : (
+            notes.map(n => (
+              <div className="note-card" key={n._id}>
+                <h3>{n.title}</h3>
+                <span className="subject">{n.subject}</span>
+                <p>{n.content}</p>
+                <button onClick={() => deleteNote(n._id)}>
+                  Delete
+                </button>
+              </div>
+            ))
+          )}
         </div>
-      ))}
+      </section>
 
-      <h2>Upload PDF</h2>
+      <section className="section">
+        <h2>My PDF Library</h2>
 
-      <input
-        type="file"
-        accept=".pdf,application/pdf"
-        onChange={uploadPDF}
-      />
-
-      <h2>My PDFs</h2>
-
-      {pdfs.map(p => (
-        <div key={p._id}>
-          <h3>{p.name}</h3>
-
-          <a
-            href={url + "/pdfs/" + p._id + "/view"}
-            target="_blank"
-            rel="noreferrer"
-          >
-            View PDF
-          </a>
-
-          {" | "}
-
-          <a href={url + "/pdfs/" + p._id + "/download"}>
-            Download PDF
-          </a>
-
-          <br />
-
-          <button onClick={() => deletePDF(p._id)}>
-            Delete PDF
-          </button>
+        <div className="upload-area">
+          <p>Upload your study materials</p>
+          <input
+            type="file"
+            accept=".pdf,application/pdf"
+            onChange={uploadPDF}
+          />
         </div>
-      ))}
-    </div>
+
+        <div className="pdf-grid">
+          {pdfs.length === 0 ? (
+            <p className="empty">No PDFs uploaded yet.</p>
+          ) : (
+            pdfs.map(p => (
+              <div className="pdf-card" key={p._id}>
+                <h3>PDF Document</h3>
+                <p>{p.name}</p>
+
+                <a
+                  href={url + "/pdfs/" + p._id + "/view"}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View PDF
+                </a>
+
+                {" | "}
+
+                <a href={url + "/pdfs/" + p._id + "/download"}>
+                  Download
+                </a>
+
+                <br />
+
+                <button onClick={() => deletePDF(p._id)}>
+                  Delete
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+      </section>
+
+      <footer className="footer">
+        Made with care | NoteNest © 2026
+      </footer>
+
+    </main>
   );
 }
 
